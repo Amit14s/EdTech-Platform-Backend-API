@@ -1,6 +1,6 @@
 import user from "../models/usermodel.js"
 import bcrypt from "bcryptjs";
-import sendmail from "../model/sendmail.js";
+import transporter from "../model/sendmail.js";
 import crypto from "crypto";
 import cloudinary from "../config/cloudinary2.js";
 import fs from "fs";
@@ -123,13 +123,22 @@ const forgotpassword=async(req,res,next)=>{
         message:"token not generated"
     })
    }
-   const send=sendmail(resetpasswordtoken);
-   if(send){
-    console.log(resetpasswordtoken);
-    res.status(200).json({
-        message:`the reset password  token is sent to ${email}`
-    })
-   }
+    const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+
+    await transporter.sendMail({
+      to: user.email,
+      subject: "Reset your Clueso password",
+      html: `
+        <p>You requested a password reset.</p>
+        <p>Click the link below to reset your password:</p>
+        <a href="${resetUrl}">${resetUrl}</a>
+        <p>This link expires in 15 minutes.</p>
+      `
+    });
+
+    res.json({
+      message: "If the email exists, a reset link has been sent"
+    });
 }
 const resetpassword=async (req,res,next)=>{
     const {resettoken} = req.params;
