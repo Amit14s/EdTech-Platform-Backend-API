@@ -43,7 +43,7 @@ userschema.pre('save', async function(next){
 userschema.methods.generatejwttoken = function () {
     return JWT.sign(
         { id: this._id, email: this.email ,role:this.role},
-        "mynameisamiyt",
+        process.env.SECRET,
         { expiresIn: "7d" }
     );
 };

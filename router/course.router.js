@@ -7,7 +7,7 @@ const router=Router();
  
 router.route("/")
 .get(getallcourses)
-.post(jwttoken,isauthorized,upload.single("thumbnail"),createcourses)
+.post(jwttoken,isauthorized,upload.single("file"),createcourses)
 
 router.route("/:id")
 .post(jwttoken,isauthorized,updatecourse)

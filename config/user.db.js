@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const MONGOURL=process.env.MONGO_URL|| "mongodb://127.0.0.1:27017/edtech";
+const MONGOURL=process.env.MONGO_URL;
 const connecttodb=async()=>{
     try{
         const conn=mongoose.connect(MONGOURL);

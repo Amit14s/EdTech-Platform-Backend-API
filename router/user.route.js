@@ -17,7 +17,7 @@ router.get('/get',(req,res)=>{
         })
        }
     });
-router.post('/register',upload.single("profilepic"),register);
+router.post('/register',upload.single("file"),register);
 router.post('/login',login);
 router.post('/logout',logout);
 router.post('/aboutme',jwttoken,aboutme);

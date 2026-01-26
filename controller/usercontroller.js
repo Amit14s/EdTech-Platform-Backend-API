@@ -22,13 +22,16 @@ const register=async (req,res,next)=>{
     const userexits=await user.findOne({email});
     if(userexits){
         return res.status(400).json({
+            success:false,
             message:"user already exits"
         })
     }
+    console.log("enter register")
     let profilepicurl=null;
     if(req.file){
          const uploadr = await cloudinary.uploader.upload(req.file.path, { folder: "profile" });
     profilepicurl = uploadr.secure_url;
+    console.log(profilepicurl);
 
    
     deletelocal(req.file.path);
@@ -87,7 +90,7 @@ const login=async(req,res,next)=>{
 const logout=async (req,res,next)=>{
     try{
         res.clearCookie("token",cookieoption);
-    res.status(200).json({ message: "Logged out successfully" });
+    res.status(200).json({ success:true,message: "Logged out successfully" });
     }
     catch(err){
         return res.status(400).json({
