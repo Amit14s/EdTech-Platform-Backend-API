@@ -13,7 +13,7 @@ httpOnly:true,
 secure:true
 }
 const register=async (req,res,next)=>{
-    const {name,email,password}=req.body;
+    const {name,email,password,role}=req.body;
     if(!name||!email||!password){
         return res.status(400).json({
             message:"all fields are required"
@@ -41,6 +41,7 @@ const register=async (req,res,next)=>{
         name,
         email,
         password,
+        role,
         profilepic:profilepicurl
     });
     if(!person){

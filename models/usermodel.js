@@ -29,7 +29,15 @@ const userschema = new Schema({
       default:"user"
     },
     forgotpasswordtoken:String,
-    forgotpasswordexpiry:Date
+    forgotpasswordexpiry:Date,
+    subscription:{
+        id:{
+            type:String,
+        },
+       status: {
+        type:String
+        }
+    }
 },{
     timestamps:true
 });

@@ -22,6 +22,7 @@ const getallcourses=async(req,res,next)=>{
 }
 const createcourses=async (req,res,next)=>{
    try{
+    console.log("1 ")
      const {title,description,category,createdBy}=req.body;
     if(!title||!description||!category||!createdBy){
        return  res.status(400).json({
@@ -35,6 +36,7 @@ const createcourses=async (req,res,next)=>{
             folder:"course/templates"
         });
     }
+    console.log("2")
     const courses= await course.create({
         title,
         description,
@@ -49,6 +51,7 @@ const createcourses=async (req,res,next)=>{
             secure_url:"",
         }
     })
+    console.log("3")
     if(!courses)res.status(400).json({
         message:"cannot create course something went wrong"
     })
@@ -56,6 +59,7 @@ const createcourses=async (req,res,next)=>{
         message:"course crated successfully",
         courses,
     })
+    console.log("4")
    }
    catch(e){
     res.status(400).json({

@@ -13,6 +13,8 @@ allowedHeaders: ["Content-Type", "Authorization"],
 app.use(express.urlencoded({extended:true}));
 import userrouter from "./router/user.route.js";
 import courserouter from "./router/course.router.js";
+import paymentrouter from "./router/payment.router.js"
+import contactrouter from "./router/contactUs.router.js"
 
 app.get('/ping',(req,res)=>{
     console.log("app is running");
@@ -20,4 +22,6 @@ app.get('/ping',(req,res)=>{
 })
 app.use("/user",userrouter);
 app.use("/course",courserouter);
+app.use("/payment",paymentrouter);
+app.use("/contactUs",contactrouter);
 export default app;
