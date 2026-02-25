@@ -2,16 +2,19 @@ import JWT from "jsonwebtoken"
 import Razorpay from "razorpay";
 const jwttoken=(req,res,next)=>{
     const token=(req.cookies && req.cookies.token)||null;
-    if(!token) return res.status(400).json({
+    if(!token){
+        console.log("no token")
+         return res.status(400).json({
         success:false,
-        message:"no cokie present"
+        message:"no cookie present"
     })
+    }
     try{
         const payload=JWT.verify(token,process.env.SECRET);
         req.user={id:payload.id,email:payload.email,role:payload.role};
     }
     catch(err){
-   
+        console.log(err)
         return res.status(400).json({mesage:err.message});
   }
     
