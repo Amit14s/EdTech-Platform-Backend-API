@@ -35,7 +35,8 @@ const userschema = new Schema({
             type:String,
         },
        status: {
-        type:String
+        type:String,
+        default:'Not Subscribed'
         }
     }
 },{

@@ -1,5 +1,5 @@
 import {Router} from "express";
-import { register,login,logout,aboutme,forgotpassword ,resetpassword,changepassword,updater} from "../controller/usercontroller.js";
+import { register,login,logout,aboutme,forgotpassword ,resetpassword,changepassword,updater,getstats} from "../controller/usercontroller.js";
 import {jwttoken ,isauthorized}from "../middleware/auth.middleware.js";
 import  upload  from "../middleware/multtt.js";
 const router=Router();
@@ -24,5 +24,6 @@ router.post('/aboutme',jwttoken,aboutme);
 router.post('/forgot_password',forgotpassword);
 router.post('/reset/:resettoken',resetpassword);
 router.post('/changepassword',jwttoken,changepassword);
-router.post('/update',jwttoken,updater);
+router.post('/update',jwttoken,upload.single("profilepic"),updater);
+router.get('/stats',jwttoken,isauthorized('admin'),getstats)
 export default router;

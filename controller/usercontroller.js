@@ -1,4 +1,5 @@
 import user from "../models/usermodel.js"
+import course from "../models/coursemodel.js";
 import bcrypt from "bcryptjs";
 import transporter from "../model/sendmail.js";
 import crypto from "crypto";
@@ -26,14 +27,13 @@ const register=async (req,res,next)=>{
             message:"user already exits"
         })
     }
-    console.log("enter register")
+    
     let profilepicurl=null;
     if(req.file){
-         const uploadr = await cloudinary.uploader.upload(req.file.path, { folder: "profile" });
+    console.log("enter req.file")
+    const uploadr = await cloudinary.uploader.upload(req.file.path, { folder: "profile" });
     profilepicurl = uploadr.secure_url;
-    console.log(profilepicurl);
-
-   
+    profilepicurl?console.log(profilepicurl):console.log("error in uplodr");
     deletelocal(req.file.path);
     }
    
@@ -104,7 +104,8 @@ const aboutme=async(req,res,next)=>{
    const people=await user.findById(userid);
    if(!people)return res.status(400).json({message:"no data"});
    res.status(200).json({
-    user:people
+    succes:true,
+    people
    })
 }
 
@@ -174,31 +175,46 @@ const changepassword= async (req,res,next)=>{
       const id=req.user.id;
       const person=await user.findById(id);
       if(!person)res.status(4000).json({
+        success:false,
         message:"something went wrong"
       })
       const com=await bcrypt.compare(oldpass,person.password);
       if(!com)res.status(400).json({
+        success:false,
         message:"old password is wrong,i.e, it do not match!!!!!!!"
       })
       person.password=newpass;
       await person.save();
       res.status(200).json({
+        success:true,
         message:"paswwword changed successfully"
       })
       person.password=undefined;
 }
 const updater=async(req,res,next)=>{
      const id=req.user.id;
+     console.log('i am here')
+
+ let profilepicurl=null;
+    if(req.file){
+    console.log("enter req.file")
+    const uploadr = await cloudinary.uploader.upload(req.file.path, { folder: "profile" });
+    profilepicurl = uploadr.secure_url;
+    req.body.profilepic?console.log(profilepicurl):console.log("error in uplodr");
+    req.body.profilepic=profilepicurl;
+    deletelocal(req.file.path);
+    }
      const people=await user.findByIdAndUpdate(
         id,
         {
-            $set:req.body
+            $set:req.body,
         },
         {
             new:true,
             runValidators:true
         }
      )
+     console.log('i am here2')
      if(!people){
         res.status(400).json({
             succes:false,
@@ -207,10 +223,29 @@ const updater=async(req,res,next)=>{
      }
      res.status(200).json({
         success:true,
-        message:"updated successfully"
+        message:"updated successfully",
+        people
      })
 
 };
+
+const getstats=async(req,res)=>{
+    try{
+      const totaluser=await user.countDocuments();
+      const totalsubscription= await user.countDocuments({"subscription.status":"active"})
+    res.status(200).json({
+        success:true,
+        totaluser,
+        totalsubscription
+    })
+   
+    }
+ catch(err){
+        return res.status(400).json({
+            message:err
+        })
+    }
+}
 export {
     register,
     login,
@@ -219,5 +254,6 @@ export {
     forgotpassword,
     resetpassword,
     changepassword,
-    updater
+    updater,
+    getstats
 }

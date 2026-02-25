@@ -32,6 +32,7 @@ console.log(subscription);
    await User.save();
 
    res.status(200).json({
+    success:true,
       message:'subscription done',
       subscription
    })
@@ -63,22 +64,22 @@ export const verifysubscription = async (req, res,next) => {
       .digest("hex");
 
     // 2️⃣ Compare signatures
-    if (generatedSignature !== razorpay_signature) {
+    console.log(generatedSignature==signature)
+    if(generatedSignature !==signature){
       return res.status(400).json({
         success: false,
         message: "Payment verification failed",
       });
     }
-    const payment= await payment.create({
-    payment_id,
-    subscription_id,
-    signature,
+    const Payment= await payment.create({
+    payment_id: payment_id,
+    subscription_id:subscription_id,
+    payment_signature:signature,
     })
-
     // 3️⃣ Update user subscription status
     const User = await user.findById(req.user.id);
 
-    User.subscription.id = razorpay_subscription_id;
+    User.subscription.id = subscription_id;
     User.subscription.status = "active";
 
     await User.save();
@@ -94,4 +95,58 @@ export const verifysubscription = async (req, res,next) => {
     });
   }
 };
+
+export const unsubscribe=async (req,res,next)=>{
+     try{
+
+      const id=req.user.id;
+      const people= await user.findById(id);
+      if (!people.subscription.id) {
+      return res.status(400).json({
+        success: false,
+        message: "No active subscription found",
+      });
+    }
+      const subscription_id=people.subscription.id;
+      const subscription= await razorpay.subscriptions.cancel(subscription_id,{ cancel_at_cycle_end: 0 } );
+       people.subscription.id=""
+   people.subscription.status="Not Subscribed"
+
+   await people.save();
+
+   res.status(200).json({
+     success:true,
+      message:'subscription done',
+      subscription
+   })
+
+     }
+     catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  } 
+}
+
+export const allpayment= async (req,res,next)=>{
+  try{
+    const count = Number(req.query.count) || 10;
+
+    const payments= await razorpay.subscriptions.all({
+      count:count||10
+    });
+    return res.status(200).json({
+     success:true,
+      payments
+    })
+  }
+   catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  } 
+}
+
 

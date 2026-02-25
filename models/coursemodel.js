@@ -13,7 +13,7 @@ const createSchema=new Schema({
         type:String,
         required:[true,'description is required'],
         minLength:[20,'description must be atleast 8 character'],
-        maxLength:[200,'description should be less than 60 character'],
+        
     },
     category:{
         type:String,
@@ -33,14 +33,9 @@ const createSchema=new Schema({
             title:String,
             description:String,
             lecture:{
-                public_id:{
+                videoUrl:{
                     type:String,
-                    required:true
-                    
-                },
-                secure_url:{
-                    type:String,
-                    required:true
+                    required:true 
                 }
             }
         }

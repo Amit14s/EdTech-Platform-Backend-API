@@ -56,10 +56,10 @@ const createcourses=async (req,res,next)=>{
         message:"cannot create course something went wrong"
     })
     res.status(200).json({
-        message:"course crated successfully",
+        success:true,
+        message:"course created successfully",
         courses,
     })
-    console.log("4")
    }
    catch(e){
     res.status(400).json({
@@ -105,6 +105,96 @@ const deletecourse=async(req,res,next)=>{
     })
     }
 }
+const getlecture=async(req,res,next)=>{
+   try{
+     const {courseid}=req.query;
+    const cour = await course.findById(courseid);
+      if (!cour) {
+      return res.status(404).json({
+        success: false,
+        message: "Course not found"
+      });
+    }
+    return res.status(200).json({
+        success:true,
+        lectures:cour.lectures
+    })
+   }
+   catch(e){
+         res.status(400).json({
+         message:e.message
+    })
+    }
+
+
+}
+
+const addlecture=async (req,res,next)=>{
+    console.log("kk0")
+    try{
+        const { courseid } = req.params;
+         console.log("cOURSEID->"+courseid)
+
+     const {title,description,videoUrl}=req.body
+     console.log(title,description,videoUrl)
+    const cour = await course.findById(courseid);
+      if (!cour) {
+      return res.status(404).json({
+        success: false,
+        message: "Course not found"
+      });
+    }
+    cour.lectures.push({
+        title,
+        description,
+        lecture: { videoUrl }
+    })
+    cour.numberofLectures = cour.lectures.length;
+     await cour.save();
+    return res.status(200).json({
+      success: true,
+      message: "Lecture added successfully",
+      lectures: cour.lectures
+    });
+    
+   }
+   catch(e){
+         res.status(500).json({
+         message:e.message
+    })
+    }
+}
+ const deletelecture=async(req,res)=>{
+   try{
+    const {courseid,lectid}=req.body;
+    console.log("courseid:"+ courseid)
+    console.log(lectid)
+    const foundCourse = await course.findById(courseid);
+if(!foundCourse){
+    res.status(400).json({
+        success:false,
+        message:'course not found'
+    })
+}
+foundCourse.lectures = foundCourse.lectures.filter(
+   (lec) => lec._id.toString() !== lectid
+);
+
+foundCourse.numberofLectures = foundCourse.lectures.length;
+
+await foundCourse.save();
+res.status(200).json({
+    success:true,
+    lectures:foundCourse.lectures
+})
+
+   }
+    catch(e){
+         res.status(500).json({
+         message:e.message
+    })
+    }
+}
    
 
 
@@ -114,4 +204,7 @@ export {
     createcourses,
     updatecourse,
     deletecourse,
+    getlecture,
+    addlecture,
+    deletelecture,
 }
