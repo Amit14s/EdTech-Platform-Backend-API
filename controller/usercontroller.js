@@ -8,13 +8,11 @@ import fs from "fs";
 const deletelocal=(path)=>{
     fs.unlink(path,()=>{})
 }
-const cookieoption={
-maxAge:7*24*60*60*1000,
-
+const cookieoption = {
+  maxAge: 7*24*60*60*1000,
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
-
+  secure: true,
+  sameSite: "none"
 }
 const register=async (req,res,next)=>{
     const {name,email,password,role}=req.body;
