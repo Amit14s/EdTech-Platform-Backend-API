@@ -1,0 +1,404 @@
+{
+  "info": {
+    "_postman_id": "5b93115d-4e96-4418-b8c6-0d4f14844963",
+    "name": "learning managment system backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "49214277",
+    "_collection_link": "https://go.postman.co/collection/49214277-5b93115d-4e96-4418-b8c6-0d4f14844963?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Courses",
+      "item": [
+        {
+          "name": "Get all course",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "## Summary\n\nRetrieves all courses from the server.\n\n## Returns\n\nReturns a response containing the list of available course records at a high level.\n\n## Notes\n\n- Method: `GET`\n    \n- Endpoint: `http://localhost:5000/course/`\n    \n- No request body is required.\n    \n- This request is intended to fetch course data only."
+          },
+          "response": []
+        },
+        {
+          "name": "Create course",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "",
+                  "type": "text",
+                  "uuid": "a2077a0c-ca12-43bb-b4bc-dbe14a73a066"
+                },
+                {
+                  "key": "description",
+                  "value": "",
+                  "type": "text",
+                  "uuid": "14b6f6d8-38fc-4987-8711-e0b7826ac29c"
+                },
+                {
+                  "key": "category",
+                  "value": "",
+                  "type": "text",
+                  "uuid": "2357cbff-a12e-4c61-b43b-9cb31aad2a24"
+                },
+                {
+                  "key": "createdBy",
+                  "value": "",
+                  "type": "text",
+                  "uuid": "a50135cf-fcc7-4b44-a57f-36289d5f094f"
+                },
+                {
+                  "key": "file",
+                  "type": "file",
+                  "uuid": "e4d89aaa-8413-4cbd-97e1-981a69b4782a",
+                  "value": null
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:5000/course/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "course",
+                ""
+              ]
+            },
+            "description": "**Method & path**\n\n- `POST /course/`\n    \n\n**Content type**\n\n- `multipart/form-data`\n    \n\n**Body fields**\n\n- `title`: Title of the course.\n    \n- `description`: Description of the course.\n    \n- `category`: Category for the course.\n    \n- `createdBy`: Creator information for the course.\n    \n- `image`: Image file uploaded with the course data.\n    \n\n**Expected success behavior**\n\n- On success, the server creates a new course using the provided form fields and uploaded image, then returns a successful response."
+          },
+          "response": []
+        },
+        {
+          "name": "get all lectures of course",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/course/lectures",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "course",
+                "lectures"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Lecture",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/course/lectures",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "course",
+                "lectures"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Course",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "// write name and value of field you want to update",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/course/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "course",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Course",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/course/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "course",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Logout",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/user/logout",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "user",
+            "logout"
+          ]
+        },
+        "description": "Logs out the current authenticated user.\n\nExpected behavior:\n\n- Invalidates the active session or authentication token on the server.\n    \n- After a successful logout, the user should no longer be treated as authenticated for protected routes.\n    \n\nRequest body:\n\n- This endpoint does not require a request body.\n    \n\nNotes:\n\n- Send this request as POST to sign the current user out."
+      },
+      "response": []
+    },
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "name",
+              "value": "anshul",
+              "type": "text",
+              "uuid": "f1474d5e-c05b-4ea4-b89c-2ae7b3989cc7"
+            },
+            {
+              "key": "email",
+              "value": "ank@1gmail.com",
+              "type": "text",
+              "uuid": "dc1cfe63-c400-40fc-83f5-572d21d9bc66"
+            },
+            {
+              "key": "role",
+              "value": "admin",
+              "type": "text",
+              "uuid": "c13f6963-a17c-4e66-be63-e8861eb2ec83"
+            },
+            {
+              "key": "file",
+              "type": "file",
+              "uuid": "5c6f762b-9ca8-4537-b291-d6ed25176010",
+              "src": "/C:/Users/Administrator/Downloads/images (1).jfif"
+            },
+            {
+              "key": "password",
+              "value": "123456",
+              "type": "text",
+              "uuid": "2d5f2004-1f5e-4014-a18f-c8343c64fe4c"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:5000/user/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "user",
+            "register"
+          ]
+        },
+        "description": "Registers a new user account.\n\n**Method & endpoint**\n\n- `POST http://localhost:5000/user/register`\n    \n\n**Request body**  \nSend the request as `multipart/form-data`.\n\nRequired fields:\n\n- `name` — user name\n    \n- `email` — user email address\n    \n- `role` — user role\n    \n- `password` — user password\n    \n\nOptional field:\n\n- `file` — file upload, if provided\n    \n\n**Notes**\n\n- Use this request to create a user by submitting the required form fields.\n    \n- On success, the server should register the user.\n    \n- On failure, the server returns an error response if validation or processing fails."
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/user/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "user",
+            "login"
+          ]
+        },
+        "description": "Authenticates a user and starts a login session.\n\n**Endpoint**  \n`POST /user/login`\n\n**Purpose**  \nUse this endpoint to submit user credentials and attempt authentication.\n\n**Request body**  \nThis request is expected to include a JSON body with login-related fields. Typical fields may include an identifier such as email or username, and a password. Exact field names and validation rules depend on the backend implementation.\n\n**Success behavior**  \nOn success, the server typically returns a confirmation that authentication succeeded, and may include user details, a token, session information, or related authentication metadata.\n\n**Error behavior**  \nOn failure, the server typically returns an error indicating that the request was invalid, required credentials were missing, or the provided credentials were not accepted. Additional validation or server-side errors may also be returned depending on the implementation."
+      },
+      "response": []
+    },
+    {
+      "name": "Aboutme",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/user/aboutme",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "user",
+            "aboutme"
+          ]
+        },
+        "description": "Returns information about the currently authenticated user.\n\nMethod: POST  \nEndpoint: /user/aboutme\n\nUse this request to retrieve profile or account details for the user associated with the current authentication context. This request does not require a request body.\n\nExpected behavior:\n\n- Identifies the current user from the active authentication/session context\n    \n- Returns the user's details if the request is authorized\n    \n- Returns an error if authentication is missing or invalid\n    \n\nNotes:\n\n- Ensure any required authentication headers or session state are configured before sending the request.\n    \n- The exact response fields depend on the backend implementation."
+      },
+      "response": []
+    },
+    {
+      "name": "Forgot_Password",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/user/forgot_password",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "user",
+            "forgot_password"
+          ]
+        },
+        "description": "## Forgot Password\n\nInitiates the password reset flow for a registered user. When called with a valid email address, the server sends a password reset link to that email. The link contains a unique token that must be used with the **reset password** endpoint to complete the reset.\n\n### Endpoint\n\n`POST http://localhost:5000/user/forgot_password`\n\n### Request Body\n\nSend the user's registered email address as JSON:\n\n``` json\n{\n  \"email\": \"user@example.com\"\n}\n\n ```\n\n| Field | Type | Required | Description |\n| --- | --- | --- | --- |\n| `email` | string | Yes | The email address of the registered user |\n\n### Responses\n\n| Status | Description |\n| --- | --- |\n| `200 OK` | Reset email sent successfully |\n| `404 Not Found` | No account found with the provided email |\n| `400 Bad Request` | Missing or invalid email field |\n\n### Notes\n\n- The reset token included in the email link is time-limited.\n    \n- Use the token with the **reset password** endpoint (`POST /user/reset/{token}`) to set a new password.\n    \n- This endpoint does not require authentication."
+      },
+      "response": []
+    },
+    {
+      "name": "Change_Password",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/user/changepassword",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "user",
+            "changepassword"
+          ]
+        },
+        "description": "## Change Password\n\nAllows an authenticated user to change their account password.\n\n**Endpoint:** `POST /user/changepassword`\n\n### Request Body\n\nSend a JSON object with the following fields:\n\n| Field | Type | Required | Description |\n| --- | --- | --- | --- |\n| `currentPassword` | string | Yes | The user's current (existing) password |\n| `newPassword` | string | Yes | The new password to set for the account |\n| `confirmPassword` | string | Yes | Must match `newPassword` to confirm the change |\n\n### Example Request Body\n\n``` json\n{\n  \"currentPassword\": \"OldPassword@123\",\n  \"newPassword\": \"NewPassword@456\",\n  \"confirmPassword\": \"NewPassword@456\"\n}\n\n ```\n\n### Responses\n\n| Status | Description |\n| --- | --- |\n| `200 OK` | Password changed successfully |\n| `400 Bad Request` | Validation error (e.g. passwords do not match, missing fields) |\n| `401 Unauthorized` | Current password is incorrect or user is not authenticated |\n| `500 Internal Server Error` | Unexpected server error |\n\n### Notes\n\n- The user must be logged in (authenticated) to use this endpoint.\n    \n- Ensure `newPassword` and `confirmPassword` are identical before submitting.\n    \n- Passwords should meet the application's minimum security requirements."
+      },
+      "response": []
+    },
+    {
+      "name": "User_Update",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/user/update",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "user",
+            "update"
+          ]
+        },
+        "description": "## User Update\n\nUpdates the profile information of an authenticated user.\n\n**Endpoint:** `POST /user/update`  \n**Base URL:** `http://localhost:5000`\n\n---\n\n### Authentication\n\nThis endpoint requires the user to be authenticated. Include a valid authentication token in the request headers (e.g., a Bearer token or session cookie, depending on your auth implementation).\n\n---\n\n### Request Body\n\nSend the fields you want to update as JSON in the request body. Only include the fields that need to be changed.\n\n| Field | Type | Required | Description |\n| --- | --- | --- | --- |\n| `name` | String | No | The updated full name of the user |\n| `email` | String | No | The updated email address |\n| `avatar` | String | No | URL or path to the user's avatar |\n\n**Example:**\n\n``` json\n{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"avatar\": \"https://example.com/avatar.png\"\n}\n\n ```\n\n---\n\n### Responses\n\n| Status | Description |\n| --- | --- |\n| `200` | User updated successfully |\n| `400` | Bad request — invalid or missing fields |\n| `401` | Unauthorized — user is not authenticated |\n| `500` | Internal server error |\n\n---\n\n### Notes\n\n- This endpoint is part of the **Learning Management System** backend user management module.\n    \n- Only the fields provided in the request body will be updated; other fields remain unchanged."
+      },
+      "response": []
+    },
+    {
+      "name": "reset password",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"password\":\"Harish@1234\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/user/reset/e4dd308eb37a70bcf001c9de57a24cb13a73eaccb6afb3daccab3d3281c5f874",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "user",
+            "reset",
+            "e4dd308eb37a70bcf001c9de57a24cb13a73eaccb6afb3daccab3d3281c5f874"
+          ]
+        },
+        "description": "## Reset Password\n\nResets a user's password using a secure token provided in the URL. This endpoint is typically called after the user clicks a password reset link sent to their email.\n\n---\n\n### HTTP Method & URL\n\n```\nPOST /user/reset/:token\n\n ```\n\n---\n\n### URL Parameters\n\n| Parameter | Type | Description |\n| --- | --- | --- |\n| `token` | string | A unique, time-sensitive reset token sent to the user's email address. |\n\n> **Note:** The `:token` in the URL is a secure hash generated when the user requests a password reset. It is usually delivered via an email link and may expire after a set period. \n  \n\n---\n\n### Request Body\n\nSend a JSON object with the following field:\n\n| Field | Type | Required | Description |\n| --- | --- | --- | --- |\n| `password` | string | ✅ Yes | The new password to set for the user. |\n\n---\n\n### Example Request Body\n\n``` json\n{\n  \"password\": \"YourNewPassword@123\"\n}\n\n ```\n\n---\n\n### Example Request\n\n```\nPOST /user/reset/e4dd308eb37a70bcf001c9de57a24cb13a73eaccb6afb3daccab3d3281c5f874\nContent-Type: application/json\n{\n  \"password\": \"YourNewPassword@123\"\n}\n\n ```\n\n---\n\n### Notes\n\n- Ensure the token is valid and has not expired before making this request.\n    \n- The password should meet any complexity requirements enforced by the API (e.g., minimum length, special characters).\n    \n- On success, the user's password is updated and the reset token is typically invalidated."
+      },
+      "response": []
+    }
+  ]
+}
