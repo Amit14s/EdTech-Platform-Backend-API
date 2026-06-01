@@ -234,16 +234,16 @@ Backend Developer — Node.js | Express | MongoDB
 
 
 
-## FOR PERSONAL USE ONLY:
+### FOR PERSONAL USE ONLY:
 use CRON-JOB for preventing sleep of server
 
-### FRONTEND GITHUB REPO LINK
+# FRONTEND GITHUB REPO LINK
 https://github.com/Amit14s/Edtech-LMS
 
-### API DOCMENTATION
+# API DOCMENTATION
 https://github.com/Amit14s/EdTech-Platform-Backend-API/blob/main/API%20COLLECTION.JSON
 
-### LEARNING MANAGMENT SYSTEM LIVE LINK
+# LEARNING MANAGMENT SYSTEM LIVE LINK
 https://edtech-lms-jet.vercel.app/
 
 
