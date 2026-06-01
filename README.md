@@ -1,4 +1,4 @@
-EdTech Platform Backend API
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/fa0ce912-50bd-4cea-8724-a5fe7818f503" />EdTech Platform Backend API
 
 A scalable and secure RESTful backend service for an EdTech platform, built using Node.js, Express, and MongoDB.
 This API is responsible for authentication, course management, file handling, and system-level integrations, and is designed to be consumed by any frontend or client application.
@@ -236,6 +236,16 @@ Backend Developer — Node.js | Express | MongoDB
 
 
 
-### FOR MY USE ONLY:
+## FOR PERSONAL USE ONLY:
 use CRON-JOB for preventing sleep of server
+
+### FRONTEND GITHUB REPO LINK
+https://github.com/Amit14s/Edtech-LMS
+
+### API DOCMENTATION
+https://github.com/Amit14s/EdTech-Platform-Backend-API/blob/main/API%20COLLECTION.JSON
+
+### LEARNING MANAGMENT SYSTEM LIVE LINK
+https://edtech-lms-jet.vercel.app/
+
 
