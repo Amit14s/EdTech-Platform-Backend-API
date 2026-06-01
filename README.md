@@ -1,5 +1,3 @@
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/fa0ce912-50bd-4cea-8724-a5fe7818f503" />EdTech Platform Backend API
-
 A scalable and secure RESTful backend service for an EdTech platform, built using Node.js, Express, and MongoDB.
 This API is responsible for authentication, course management, file handling, and system-level integrations, and is designed to be consumed by any frontend or client application.
 
