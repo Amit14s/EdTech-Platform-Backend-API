@@ -38,8 +38,10 @@ console.log(subscription);
    })
    }
    catch(e){
-    res.status(404).json({
-        message:e
+    console.log(e)
+    res.status(502).json({
+        success:false,
+        message:e.message
     })
    }
 
