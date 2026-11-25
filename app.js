@@ -5,7 +5,7 @@ const app=express();
 app.use(express.json());
 app.use(cookie());
 app.use(cors({
-origin:process.env.FRONTEND_URL, // frontend URL
+origin:[process.env.FRONTEND_URL,"http://localhost:5173/"], // frontend URL
 credentials: true,               // REQUIRED for cookies
 methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 allowedHeaders: ["Content-Type", "Authorization"],
